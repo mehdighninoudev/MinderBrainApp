@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
+
     sdk: flutter
 
 
@@ -36,6 +37,17 @@ dependencies:
   cupertino_icons: ^1.0.2
   passwordfield: ^0.1.0
   link_text: ^0.2.0
+  firebase_core: ^1.17.0
+  flutter_form_builder: ^7.1.1
+  cloud_firestore: ^3.1.5
+  firebase_auth: ^3.3.4
+  firebase_database: ^9.0.14
+  fluttertoast: ^8.0.9
+  progress_dialog: ^1.2.4
+  google_maps_flutter: ^2.1.5
+  google_maps_flutter_web: ^0.3.3
+  location: ^4.0.0
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +73,8 @@ flutter:
 
 
 
-assets:
-  - images/logo.png
+  assets:
+    - images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

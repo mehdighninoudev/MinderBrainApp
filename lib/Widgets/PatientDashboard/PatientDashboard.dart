@@ -15,7 +15,7 @@ class _PatientDashboard extends State<PatientDashboard>{
     return MaterialApp(  
       debugShowCheckedModeBanner: false,
       home: Scaffold (  
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.white,
         appBar: AppBar(  
           title: Text("MinderBrain App"),
         ),
@@ -27,9 +27,14 @@ class _PatientDashboard extends State<PatientDashboard>{
 
               // ignore: prefer_const_literals_to_create_immutables
               children: [  
-              Center (  
+             /* Center (  
                 child: Image(image: AssetImage("../images/logo.png")),
-              ),
+              ),*/
+
+              Center(
+                  child: Image.asset('images/logo.png', width:150, height:150),
+                  //child: Image(image: AssetImage("../images/logo.png")),
+                ),
 
               Center ( 
                 child: Text("Page Patient!", 
