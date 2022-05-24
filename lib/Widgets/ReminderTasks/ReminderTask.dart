@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:minderbrain/Widgets/AddTasks/Task.dart';
+import 'package:minderbrain/Widgets/VoirTaches/TasksScreen.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:link_text/link_text.dart';
@@ -10,6 +11,7 @@ import '../PatientDashboard/PatientDashboard.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../AddPatient/Patient.dart';
 import 'package:minderbrain/Widgets/Localisation/Localisation.dart';
+import 'package:minderbrain/Widgets/TaskCompletedScreen/TaskCompletedScreen';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -109,24 +111,14 @@ class _ReminderTask extends State<ReminderTask> {
                           groupValue: radioValue,
                           onChanged: (value) {setState(() => {radioValue = value as int});}),
                       new RadioListTile<int>(
-                          title: new Text('Modifier les taches'),
-                          value: 3,
+                          title: new Text('Voir, Modifier ou Supprimer les taches'),
+                          value: 2,
                           groupValue: radioValue,
                           onChanged: (value) {setState(() => {radioValue = value as int});}),
-                           new RadioListTile<int>(
-                          title: new Text('Supprimer les taches'),
-                          value: 4,
-                          groupValue: radioValue,
-                          onChanged: (value) {setState(() => {radioValue = value as int});}),
-                           new RadioListTile<int>(
-                          title: new Text('Voir les taches'),
-                          value: 5,
-                          groupValue: radioValue,
-                          onChanged: (value) {setState(() => {radioValue = value as int});}),
-
+                          
                            new RadioListTile<int>(
                           title: new Text('Voir les taches completees'),
-                          value: 6,
+                          value: 3,
                           groupValue: radioValue,
                           onChanged: (value) {setState(() => {radioValue = value as int});}),
                          ]),
@@ -360,38 +352,18 @@ class _ReminderTask extends State<ReminderTask> {
        else if (radioValue == 2) {
          Navigator.push(   
                       context,
-                      MaterialPageRoute(builder: (context) => Login()),
+                      MaterialPageRoute(builder: (context) => TasksScreen()),
                     );
        }
 
        else if (radioValue == 3) {
          Navigator.push(   
                       context,
-                      MaterialPageRoute(builder: (context) => Login()),
+                      MaterialPageRoute(builder: (context) => TaskCompletedScreen()),
                     );
        }
 
-       else if (radioValue == 4) {
-         Navigator.push(   
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
-       }
        
-
-       else if (radioValue == 5) {
-         Navigator.push(   
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
-       }
-
-       else if (radioValue == 6) {
-         Navigator.push(   
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
-       }
    }
 }
 

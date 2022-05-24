@@ -1,6 +1,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:minderbrain/Widgets/AddPatient/redirection.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:link_text/link_text.dart';
@@ -11,11 +13,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'redirection.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-class AddTask extends StatelessWidget {
+class AddTask extends StatefulWidget {
+  @override
+  State<AddTask> createState() => _AddTask();
+}
+
+class _AddTask extends State<AddTask> {
   
   //final FirebaseAuth _auth = FirebaseAuth.instance;
-  String nomTache = '';
-  String taskDate = '';
+  var TaskController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +68,15 @@ class AddTask extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                      child: TextFormField(
+                       controller: TaskController,
                      decoration: const InputDecoration(
                      border: UnderlineInputBorder(),
                      labelText: 'Saisir tache',
                   ),
 
-                  onChanged: (value) {
+                  /*onChanged: (value) {
                     nomTache = value;
-                  },
+                  },*/
                ),
             ),
 
@@ -113,12 +120,42 @@ class AddTask extends StatelessWidget {
                     );
 
                  },*/
-                 onPressed: () {
+                 onPressed: () async {
                      
-                    Navigator.push(   
+                    String taskName = TaskController.text.trim();
+
+                    if(taskName.isEmpty) {
+                      Fluttertoast.showToast(msg: 'Merci de saisir une tache');
+                      return;
+                    }
+
+                    User? user = FirebaseAuth.instance.currentUser;
+
+                    if(user != null) {
+                      String uid = user.uid;
+                      int dt = DateTime.now().millisecondsSinceEpoch;
+
+                      DatabaseReference taskRef = FirebaseDatabase.instance.reference().child('tasks').child(uid);
+
+                      String taskId = taskRef.push().key!;
+                      await taskRef.child(taskId).set({
+                        'dt':dt,
+                        "taskName":taskName,
+                        'taskId':taskId,
+                        'completed': 0
+
+                      });
+
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                          return Redirection();
+                        }));
+
+
+                    }
+                    /*Navigator.push(   
                       context,
                       MaterialPageRoute(builder: (context) => RedirectionTache()),
-                    );
+                    );*/
                                     
                  },
                  child: const Text('Ajouter', 
