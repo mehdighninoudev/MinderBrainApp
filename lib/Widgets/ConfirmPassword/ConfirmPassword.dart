@@ -18,7 +18,7 @@ class ConfirmPassword extends StatelessWidget {
         ), 
         
         body: SafeArea(  
-          child: Column(  
+          child: SingleChildScrollView(child:Column(  
             verticalDirection: VerticalDirection.down,
             crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -80,7 +80,7 @@ class ConfirmPassword extends StatelessWidget {
           ),
 
             ], 
-          ),
+          )),
         ),
       ),
     );

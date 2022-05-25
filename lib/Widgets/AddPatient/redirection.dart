@@ -30,7 +30,7 @@ class Redirection extends StatelessWidget {
 
         body:  
           SafeArea(   
-            child: Column(   
+            child: SingleChildScrollView(child:Column(   
               verticalDirection: VerticalDirection.down, 
               crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -77,19 +77,8 @@ class Redirection extends StatelessWidget {
                 
           ),
               
-             
-                
-                          
-
-            
-
-
-            
-  
-    
-          
-              ]
-          ),
+      ]
+          )),
           )
         ),
          

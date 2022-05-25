@@ -43,7 +43,7 @@ class _SignUp extends  State<SignUp> {
 
         body:  
           SafeArea(   
-            child: Column(   
+            child: SingleChildScrollView(child: Column(   
               verticalDirection: VerticalDirection.down, 
               crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -297,7 +297,9 @@ class _SignUp extends  State<SignUp> {
           
           
               ]
-          ),
+          ),)
+            
+             ,
           )
         ),
         

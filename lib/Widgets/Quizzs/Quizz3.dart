@@ -26,7 +26,7 @@ class _Quizz3 extends State<Quizz3> {
           title: Text("MinderBrain App"),
         ),
         body: SafeArea(
-          child: Column(
+          child: SingleChildScrollView(child: Column(
             verticalDirection: VerticalDirection.down,
             crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -204,7 +204,9 @@ class _Quizz3 extends State<Quizz3> {
                 ),
               ),
             ],
-          ),
+          ),)
+          
+          ,
         ),
       ),
     );

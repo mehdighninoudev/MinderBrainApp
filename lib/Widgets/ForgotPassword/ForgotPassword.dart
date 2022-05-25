@@ -16,7 +16,7 @@ class ForgotPassword extends StatelessWidget {
         ),
 
         body: SafeArea(  
-          child: Column(  
+          child: SingleChildScrollView(child: Column(  
             verticalDirection: VerticalDirection.down,
             crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -72,7 +72,7 @@ class ForgotPassword extends StatelessWidget {
 
 
             ],
-          ),
+          )),
         )
       ),
     );

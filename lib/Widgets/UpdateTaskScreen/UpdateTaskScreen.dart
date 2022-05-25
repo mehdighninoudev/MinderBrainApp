@@ -27,7 +27,7 @@ class _UpdateTaskScreen extends State<UpdateTaskScreen> {
       ),
 
       body:  SafeArea(
-        child: Column(children: [
+        child: SingleChildScrollView(child: Column(children: [
           Center(child: Image.asset("images/logo.png")),
           Center(child: Text("Modifier Tache", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey, fontSize: 22.0),)),
 
@@ -48,12 +48,14 @@ class _UpdateTaskScreen extends State<UpdateTaskScreen> {
 
             User? user = FirebaseAuth.instance.currentUser;
             if(user != null) {
-              DatabaseReference taskRef = FirebaseDatabase.instance.reference().child("tasks").child(user!.uid).child(widget.task.taskId);
+              DatabaseReference taskRef = FirebaseDatabase.instance.reference().child("tasks").child(user.uid).child(widget.task.taskId);
               await taskRef.update({'taskName': taskName});
             }
           }, child: Text("Modifier")),
 
-        ],)
+        ],))
+        
+          
       ),
     );
   }

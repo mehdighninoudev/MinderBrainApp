@@ -1,15 +1,50 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:link_text/link_text.dart';
 import '../Login/Login.dart';
+import 'package:minderbrain/Widgets/VoirTaches/TaskModel.dart';
+import 'package:minderbrain/Widgets/PatientDashboard/Redirection.dart';
 
 
 class PatientDashboard extends StatefulWidget {
+
+  
   State<PatientDashboard> createState() => _PatientDashboard();
 }
 
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+_signOut() async {
+  await _firebaseAuth.signOut();
+
+  
+}
+
 class _PatientDashboard extends State<PatientDashboard>{
+
+ final completed = "1"; 
+
+
+  var tasks = <TaskModel>[];
+
+   User? user;
+  DatabaseReference? patientRef;
+  DatabaseReference? taskRef;
+
+  void initState() {
+    user = FirebaseAuth.instance.currentUser;
+    if(user != null) {
+      patientRef = FirebaseDatabase.instance.reference().child('patient').child(user!.uid);
+      taskRef = FirebaseDatabase.instance.reference().child('tasks').child(user!.uid);
+    }
+    super.initState();
+  }
+
+
+
   @override 
   Widget build(BuildContext context) {
     return MaterialApp(  
@@ -21,7 +56,7 @@ class _PatientDashboard extends State<PatientDashboard>{
         ),
 
         body: SafeArea( 
-          child: Column(  
+          child: SingleChildScrollView(child: Column( 
             verticalDirection: VerticalDirection.down,
             crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -66,7 +101,7 @@ class _PatientDashboard extends State<PatientDashboard>{
                   
                     // ignore: prefer_const_literals_to_create_immutables
                     Column (children: [
-                      Center(child: Text("Nom: Mr XX XX" , style: TextStyle(fontSize: 18.0)),
+                      Center(child: Text("Nom: Mr XX XX" ,  style: TextStyle(fontSize: 18.0)),
                       
                       ),
                       Center( child: Text("Score: 50/100",  style: TextStyle(fontSize: 18.0)),)
@@ -89,6 +124,76 @@ class _PatientDashboard extends State<PatientDashboard>{
 
                       // ignore: prefer_const_literals_to_create_immutables
                       child: Column(children: [
+                        
+
+                        StreamBuilder<DatabaseEvent>(stream: taskRef != null ? taskRef!.onValue : null, 
+          builder: (context, snapshot){
+            if(snapshot.hasData && !snapshot.hasError){
+              var event = snapshot.data as DatabaseEvent;
+              var snapshot2 = event.snapshot.value;
+              if(snapshot2 == null) {
+                return Center(child:Text("Pas de taches ajoutees"),);
+              }
+
+              Map<dynamic, dynamic> map = snapshot2 as Map<dynamic, dynamic>;
+             //Map<String, dynamic> map = snapshot2;
+             //Map<String, dynamic> map = Map<String, dynamic>.from(snapshot2);
+            // Map<String, dynamic> map = new Map<String, dynamic>.from(json.decode(snapshot2 as String));
+              var tasks = <TaskModel>[];
+
+              for(var taskMap in map.values){
+                TaskModel taskModel = TaskModel.fromMap(Map<String, dynamic>.from(taskMap));
+                tasks.add(taskModel);
+              }
+
+              //return Center(child: Text(tasks.length.toString()),);
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: tasks.length,itemBuilder: (context, index){
+                  TaskModel task = tasks[index];
+                  return Container(
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(bottom:10),
+
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 1),
+                     ),
+                    child: Column(
+                      
+                      children: [
+                      
+                      Text(task.taskName),
+                      Text(getHumanReadableDate(task.dt)),
+                      TextButton(  
+                      style: TextButton.styleFrom(primary: Colors.white),
+                      child: Text("Gerer"),
+                      onPressed: () async {
+                      TaskModel task = tasks[index];
+
+                      
+                        
+                      Navigator.push(  
+                      context, 
+                     MaterialPageRoute(builder: (context) =>  RedirectionPatient(task: task)),
+                  );
+                  // Navigate to sign up page
+                }
+              )
+                      
+                      
+                    ],)
+                  );
+                }),
+              );
+            }  else {
+              return Center(child: CircularProgressIndicator(),);
+            }
+          },)
+                        
+                        /*
                         Row(children: [
                         Center(  
                         child: Text("Tache 1",
@@ -206,7 +311,7 @@ class _PatientDashboard extends State<PatientDashboard>{
                     
                      
 
-                   ],
+                   */],
                 ) 
                       
 
@@ -222,10 +327,11 @@ class _PatientDashboard extends State<PatientDashboard>{
                    
                  ),
                  onPressed: () {
-                      Navigator.push(   
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
+                  FirebaseAuth.instance.signOut();
+
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+                  return Login();
+                  }));                     
 
                  },
                  child: const Text('Page Admin', 
@@ -239,9 +345,19 @@ class _PatientDashboard extends State<PatientDashboard>{
                 
                   
             ], 
-          )
+          ),)
+          
+          
+           
         )
       ),
     );
   }
 }
+
+  String getHumanReadableDate(int dt) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(dt);
+    return DateFormat('dd MMM yyy').format(dateTime);
+  }
+
+

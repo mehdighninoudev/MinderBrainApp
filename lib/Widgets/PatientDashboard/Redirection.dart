@@ -2,7 +2,10 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:minderbrain/Widgets/PatientDashboard/PatientDashboard.dart';
+import 'package:minderbrain/Widgets/VoirTaches/TaskModel.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:link_text/link_text.dart';
 import '../ForgotPassword/ForgotPassword.dart';
@@ -11,7 +14,18 @@ import '../ReminderTasks/ReminderTask.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-class RedirectionTache extends StatelessWidget {
+class RedirectionPatient extends StatefulWidget {
+
+final TaskModel task;
+  const RedirectionPatient({Key? key, required this.task}) : super(key: key);
+
+  @override 
+  State<RedirectionPatient> createState() =>  _RedirectionPatient();
+}
+
+class _RedirectionPatient extends State<RedirectionPatient> {
+
+
   
   //final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -30,7 +44,8 @@ class RedirectionTache extends StatelessWidget {
 
         body:  
           SafeArea(   
-            child: SingleChildScrollView(child: Column(   
+            child: SingleChildScrollView(child: 
+            Column(   
               verticalDirection: VerticalDirection.down, 
               crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -48,11 +63,19 @@ class RedirectionTache extends StatelessWidget {
 
                 SizedBox(height: 60),
 
+            
+
                 Center(
-                  child: Text("Tache Ajoutee", 
+                  child: Text("Confirmation Validation", 
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey, fontSize: 22.0),
+
+                    
 )       
                 ),
+
+
+
+
 
           Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -62,27 +85,40 @@ class RedirectionTache extends StatelessWidget {
                    fixedSize: Size(500, 50), primary: Colors.blue
                  ),
                  onPressed: () {
+                      UpdateCompleted();
+
                       Navigator.push(   
                       context,
-                      MaterialPageRoute(builder: (context) => ReminderTask()),
+                      MaterialPageRoute(builder: (context) => PatientDashboard()),
                     );
 
                  },
                  
-                 child: const Text('Retour vers Admin', 
+                 child: const Text('Valider', 
                  style: TextStyle(color: Colors.white),
 
                  ),
             ),
                 
           ),
-
+         
               ]
-          )),
+          ),
+            )
+            
           )
         ),
          
       );
   }
+
+  void UpdateCompleted () {
+  User? user = FirebaseAuth.instance.currentUser;
+            if(user != null) {
+              DatabaseReference taskRef = FirebaseDatabase.instance.reference().child("tasks").child(user.uid).child(widget.task.taskId);
+               taskRef.update({'completed': "1"});
+            }
 }
+}
+
 

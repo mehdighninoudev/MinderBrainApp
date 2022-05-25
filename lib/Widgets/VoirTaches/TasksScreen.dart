@@ -37,7 +37,7 @@ class _TasksScreen extends State<TasksScreen> {
 
       ),
       body: SafeArea( 
-        child:Column(children: [
+        child: SingleChildScrollView(child: Column(children: [
           Center(
             child: Image.asset('images/logo.png'),
           ),
@@ -131,7 +131,7 @@ class _TasksScreen extends State<TasksScreen> {
           },)
 
 
-        ],),
+        ],),),
       ),
     );
   }

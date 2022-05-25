@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:minderbrain/Widgets/AddTasks/Task.dart';
+import 'package:minderbrain/Widgets/VoirTaches/TaskModel.dart';
 import 'package:minderbrain/Widgets/VoirTaches/TasksScreen.dart';
 import 'package:passwordfield/passwordfield.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,7 +60,7 @@ class _ReminderTask extends State<ReminderTask> {
 
          body: 
            SafeArea(  
-             child: Column(  
+             child:SingleChildScrollView(child: Column(  
                verticalDirection: VerticalDirection.down,
                crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -270,6 +271,9 @@ class _ReminderTask extends State<ReminderTask> {
               child: TextButton(  
                 child: Text("Page Patient"),
                 onPressed: () {
+                  var tasks = <TaskModel>[];
+
+
                   // Navigate to sign up page
                   Navigator.push(  
                     context, 
@@ -317,7 +321,9 @@ class _ReminderTask extends State<ReminderTask> {
             
 
                     ]
-                 )
+                 ),)
+             
+              
                                   
                //]
              )

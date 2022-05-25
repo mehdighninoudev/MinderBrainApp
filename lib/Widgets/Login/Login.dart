@@ -1,6 +1,3 @@
-
-// ignore_for_file: unused_local_variable
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -37,7 +34,7 @@ class Login extends StatelessWidget {
 
         body:  
           SafeArea(   
-            child: Column(   
+            child: SingleChildScrollView(child: Column(   
               verticalDirection: VerticalDirection.down, 
               crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -225,7 +222,7 @@ class Login extends StatelessWidget {
           
           
               ]
-          ),
+          )),
           )
         ),
          

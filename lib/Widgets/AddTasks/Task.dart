@@ -38,7 +38,7 @@ class _AddTask extends State<AddTask> {
 
         body:  
           SafeArea(   
-            child: Column(   
+            child: SingleChildScrollView(child: Column(   
               verticalDirection: VerticalDirection.down, 
               crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -167,7 +167,7 @@ class _AddTask extends State<AddTask> {
           ),
           
               ]
-          ),
+          )),
           )
         ),
          
