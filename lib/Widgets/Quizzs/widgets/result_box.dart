@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:minderbrain/Widgets/Quizzs/constants.dart';
+import 'package:minderbrain/Widgets/ReminderTasks/ReminderTask.dart';
+
+class ResultBox extends StatelessWidget {
+  const ResultBox({Key? key, required this.result, required this.questionLength}) : super(key:key);
+  final int result;
+  final int questionLength;
+
+  @override 
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Color.fromARGB(255, 0, 82, 149),
+      content: Padding( 
+        padding: EdgeInsets.all(70.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Text('Result', style:TextStyle(color: Colors.white, fontSize: 22.0),),
+
+          SizedBox(height: 20.0),
+          CircleAvatar(child: Text('$result/$questionLength', 
+          style: TextStyle(fontSize: 30.0),
+          ),
+          radius: 60.0,
+          backgroundColor: result == questionLength ? correct : result < questionLength/2 ? incorrect : result== questionLength/2 ? Colors.yellow : Colors.blue,
+          ),
+          SizedBox(height: 25.0),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
+                return ReminderTask();
+              }));
+            },
+
+            child: Text('Admin Dashboard', 
+                style: TextStyle(color: Colors.blue, fontSize: 20.0, 
+                letterSpacing: 1.0,
+                ),
+              ),
+          ),
+        ],)
+      ),
+    );
+  }
+}
