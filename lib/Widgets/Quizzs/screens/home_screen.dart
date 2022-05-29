@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:minderbrain/Widgets/PatientDashboard/PatientModel.dart';
 import 'package:minderbrain/Widgets/Quizzs/constants.dart';
 import 'package:minderbrain/Widgets/Quizzs/widgets/question_widget.dart';
 import '../models/question_model.dart';
@@ -8,12 +11,14 @@ import 'package:minderbrain/Widgets/Quizzs/widgets/result_box.dart';
 
 class HomeScreen extends StatefulWidget{
   const HomeScreen({Key? key}) : super(key: key);
+  
 
   @override 
   _HomeScreen createState() => _HomeScreen();
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  
   List<Question> _questions = [
     Question(  
       id: '10',
@@ -64,10 +69,13 @@ class _HomeScreen extends State<HomeScreen> {
 
   void nextQuestion(){
     if(index == _questions.length - 1) {
-      showDialog(context: context, builder: (ctx) => ResultBox(
-        result: score,
-        questionLength:  _questions.length,
+              showDialog(context: context, builder: (ctx) => ResultBox(
+              result: score,
+              questionLength:  _questions.length,
+             
       ));
+            
+      
     } else {
       if(isPressed) {
         setState(() {
@@ -117,9 +125,9 @@ class _HomeScreen extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar( 
-        backgroundColor: background, 
-        title: Text('QuizHunter App'),
-        shadowColor: Colors.transparent,
+        backgroundColor: Colors.blue, 
+        title: Text('MinderBrainApp Quizz'),
+        shadowColor: Colors.black,
         actions: [
           Padding(padding: EdgeInsets.all(18.0), child: Text('Score: $score', 
           style: TextStyle(fontSize: 18.0),
@@ -130,6 +138,7 @@ class _HomeScreen extends State<HomeScreen> {
         width: double.infinity, 
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(  
+          
           children: [ 
             QuestionWidget(
               indexAction: index,
@@ -140,14 +149,13 @@ class _HomeScreen extends State<HomeScreen> {
             Divider(color: background,),
 
             SizedBox(height: 25.0),
+            
             for(int i = 0; i < _questions[index].options.length; i++)
               GestureDetector(
                 onTap: () => checkAnswerAndUpdate(_questions[index].options.values.toList()[i]),
                 child: OptionCard(
                   option: _questions[index].options.keys.toList()[i],
-                  //color: isPressed ? _questions[index].options.values.toList()[i] == true ? correct : incorrect: Colors.white, 
-                  color: isPressed ? correct : Colors.white
-                  
+                  color: isPressed ? _questions[index].options.values.toList()[i] == true ? Colors.green : Colors.blue : Colors.black,
                   ),
               ),
             

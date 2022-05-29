@@ -12,13 +12,14 @@ class NextButton extends StatelessWidget {
       child: Container(  
         width: double.infinity, 
         decoration: BoxDecoration(
-          color: background,
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(10.0),
         ),
 
         padding: EdgeInsets.symmetric(vertical: 10.0),
         child: Text("Question Suivante", 
         textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.white),
         )
       )
     );

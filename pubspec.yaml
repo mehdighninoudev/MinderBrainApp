@@ -51,6 +51,12 @@ dependencies:
   event: ^2.1.2
   intl: ^0.17.0
   geolocator: ^8.2.1
+  shared_preferences: ^2.0.15
+  flutter_local_notifications: ^9.1.4
+  flutter_background_geolocation: ^4.6.3
+  flutter_google_places: ^0.3.0
+  google_maps_webservice: ^0.0.20-nullsafety.5
+  geocoder: ^0.2.1
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:minderbrain/Widgets/AddTasks/Task.dart';
+import 'package:minderbrain/Widgets/Localisation/PageLocalisation.dart';
 import 'package:minderbrain/Widgets/VoirTaches/TaskModel.dart';
 import 'package:minderbrain/Widgets/VoirTaches/TasksScreen.dart';
 import 'package:passwordfield/passwordfield.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../AddPatient/Patient.dart';
 import 'package:minderbrain/Widgets/Localisation/Localisation.dart';
 import 'package:minderbrain/Widgets/TaskCompletedScreen/TaskCompletedScreen';
+import 'package:minderbrain/Widgets/Localisation/PageLocalisation.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -234,13 +236,32 @@ class _ReminderTask extends State<ReminderTask> {
                         },
                       ),
                     ),),
+
+                    Center(child:Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      child: FloatingActionButton.extended(
+                        label: Text(' Configurer Localisation'),
+                        backgroundColor: Colors.deepOrange,
+                        icon: Icon(
+                          Icons.location_on,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyApp()),
+                          );
+                        },
+                      ),
+                    ),),
              
                     
               
 
                       
 
-                      Padding(
+                Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                  child: ElevatedButton(
                 

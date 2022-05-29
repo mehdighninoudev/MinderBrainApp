@@ -1,11 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:minderbrain/Widgets/PatientDashboard/PatientModel.dart';
 import 'package:minderbrain/Widgets/Quizzs/constants.dart';
 import 'package:minderbrain/Widgets/ReminderTasks/ReminderTask.dart';
+
 
 class ResultBox extends StatelessWidget {
   const ResultBox({Key? key, required this.result, required this.questionLength}) : super(key:key);
   final int result;
   final int questionLength;
+
+
 
   @override 
   Widget build(BuildContext context) {
@@ -20,7 +26,8 @@ class ResultBox extends StatelessWidget {
           Text('Result', style:TextStyle(color: Colors.white, fontSize: 22.0),),
 
           SizedBox(height: 20.0),
-          CircleAvatar(child: Text('$result/$questionLength', 
+          
+          CircleAvatar(child: Text('$result/${questionLength * 10}', 
           style: TextStyle(fontSize: 30.0),
           ),
           radius: 60.0,
@@ -28,7 +35,8 @@ class ResultBox extends StatelessWidget {
           ),
           SizedBox(height: 25.0),
           GestureDetector(
-            onTap: () {
+            onTap: () async {
+             
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context){
                 return ReminderTask();
               }));

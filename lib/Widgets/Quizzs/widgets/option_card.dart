@@ -13,7 +13,7 @@ class OptionCard extends StatelessWidget {
       child: ListTile(  
         title: Text(option, textAlign: TextAlign.center, style: TextStyle(
           fontSize: 22.0,
-          color: background,
+          color: Colors.white,
         )),
       )
     );
