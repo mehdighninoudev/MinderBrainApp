@@ -28,21 +28,37 @@ class _AddTask extends State<AddTask> {
       debugShowCheckedModeBanner: false,
       // ignore: prefer_const_constructors
       home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 160, 194, 225),
           appBar: AppBar(
-            title: Text("MinderBrain App"),
+            title: Text("                          Page Tasks"),
           ),
-          body: SafeArea(
+          body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                  Color.fromARGB(204, 232, 234, 235),
+                  Color.fromARGB(204, 232, 234, 235),
+                  Color.fromARGB(204, 232, 234, 235),
+                  Color.fromARGB(204, 232, 234, 235),
+                ])),
             child: SingleChildScrollView(
                 child: Column(
                     verticalDirection: VerticalDirection.down,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  Center(
-                    child: Image.asset('images/logo.png'),
-                    //child: Image(image: AssetImage("../images/logo.png")),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    height: 150,
+                    child: Center(
+                      child: Image.asset('images/loog2.png'),
+                      //child: Image(image: AssetImage("../images/logo.png")),
+                    ),
                   ),
-
+                  SizedBox(height: 30),
                   /*Center(
                   child: Image(image: AssetImage("../images/logo.png")),
                 ),*/
@@ -61,16 +77,27 @@ class _AddTask extends State<AddTask> {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: TextFormField(
-                      controller: TaskController,
-                      decoration: const InputDecoration(
-                        border: UnderlineInputBorder(),
-                        labelText: 'Saisir tache',
-                      ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200]?.withOpacity(0.5),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: TextFormField(
+                          controller: TaskController,
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Saisir la tache',
+                          ),
 
-                      /*onChanged: (value) {
-                    nomTache = value;
+                          /*onChanged: (value) {
+                        nomTache = value;
                   },*/
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -93,61 +120,72 @@ class _AddTask extends State<AddTask> {
             
 
             ),*/
-
+                  SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          fixedSize: Size(500, 50), primary: Colors.blue),
-                      /*onPressed: () {
-                      Navigator.push(   
-                      context,
-                      MaterialPageRoute(builder: (context) => ReminderTask()),
-                    );
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Container(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(12)),
+                              fixedSize: Size(500, 50),
+                              primary: Colors.blue),
+                          /*onPressed: () {
+                          Navigator.push(   
+                          context,
+                          MaterialPageRoute(builder: (context) => ReminderTask()),
+                        );
 
                  },*/
-                      onPressed: () async {
-                        String taskName = TaskController.text.trim();
+                          onPressed: () async {
+                            String taskName = TaskController.text.trim();
 
-                        if (taskName.isEmpty) {
-                          Fluttertoast.showToast(
-                              msg: 'Merci de saisir une tache');
-                          return;
-                        }
+                            if (taskName.isEmpty) {
+                              Fluttertoast.showToast(
+                                  msg: 'Merci de saisir une tache');
+                              return;
+                            }
 
-                        User? user = FirebaseAuth.instance.currentUser;
+                            User? user = FirebaseAuth.instance.currentUser;
 
-                        if (user != null) {
-                          String uid = user.uid;
-                          int dt = DateTime.now().millisecondsSinceEpoch;
+                            if (user != null) {
+                              String uid = user.uid;
+                              int dt = DateTime.now().millisecondsSinceEpoch;
 
-                          DatabaseReference taskRef = FirebaseDatabase.instance
-                              .reference()
-                              .child('tasks')
-                              .child(uid);
+                              DatabaseReference taskRef = FirebaseDatabase
+                                  .instance
+                                  .reference()
+                                  .child('tasks')
+                                  .child(uid);
 
-                          String taskId = taskRef.push().key!;
-                          await taskRef.child(taskId).set({
-                            'dt': dt,
-                            "taskName": taskName,
-                            'taskId': taskId,
-                            'completed': 0
-                          });
+                              String taskId = taskRef.push().key!;
+                              await taskRef.child(taskId).set({
+                                'dt': dt,
+                                "taskName": taskName,
+                                'taskId': taskId,
+                                'completed': 0
+                              });
 
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return RedirectionTache();
-                          }));
-                        }
-                        /*Navigator.push(   
-                      context,
-                      MaterialPageRoute(builder: (context) => RedirectionTache()),
-                    );*/
-                      },
-                      child: const Text(
-                        'Ajouter',
-                        style: TextStyle(color: Colors.white),
+                              Navigator.of(context)
+                                  .push(MaterialPageRoute(builder: (context) {
+                                return RedirectionTache();
+                              }));
+                            }
+                            /*Navigator.push(   
+                          context,
+                          MaterialPageRoute(builder: (context) => RedirectionTache()),
+                        );*/
+                          },
+                          child: const Text(
+                            'Ajouter',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
                       ),
                     ),
                   ),

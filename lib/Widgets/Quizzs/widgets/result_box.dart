@@ -23,7 +23,7 @@ class ResultBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Result',
+                'Resultat',
                 style: TextStyle(color: Colors.white, fontSize: 22.0),
               ),
               SizedBox(height: 20.0),
@@ -49,12 +49,14 @@ class ResultBox extends StatelessWidget {
                     return ReminderTask();
                   }));
                 },
-                child: Text(
-                  'Admin Dashboard',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 20.0,
-                    letterSpacing: 1.0,
+                child: Center(
+                  child: Text(
+                    'Admin Dashboard',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 15.0,
+                      letterSpacing: 1.0,
+                    ),
                   ),
                 ),
               ),

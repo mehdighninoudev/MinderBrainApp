@@ -10,12 +10,12 @@ class NextButton extends StatelessWidget {
     return GestureDetector(
         onTap: nextQuestion,
         child: Container(
-            width: double.infinity,
+            // width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(10.0),
             ),
-            padding: EdgeInsets.symmetric(vertical: 10.0),
+            padding: EdgeInsets.all(20),
             child: Text(
               "Question Suivante",
               textAlign: TextAlign.center,

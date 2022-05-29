@@ -21,49 +21,49 @@ class _HomeScreen extends State<HomeScreen> {
     Question(
       id: '10',
       title: 'Avez-vous du mal à vous rappelez de vos taches journaliéres ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '11',
       title:
           'Avez-vous du mal à vous concentrez lorsque vous regardez la télévision, jouez sur votre téléphone/tablette ou écoutez de la musique ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '12',
       title:
           'Oubliez-vous les noms d\'objets familiers et utilisez-vous des expressions générales telles que « tu vois ce que je veux dire » ou « cette chose » ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '13',
       title:
           'Êtes-vous facilement confus en conduisant ou en utilisant des outils ? Vous perdez-vous dans des endroits qui vous sont familiers ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '14',
       title:
           'Avez-vous besoin d\'aide pour vous habiller, vous souvenir de prendre vos médicaments et/ou gérer vos finances ? ',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '15',
       title:
           'Ces difficultés reflètent-elles des changements par rapport à votre façon de se souvenir il y a quelques années ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '16',
       title:
           'Vous confondez-vous avec le rappel du jour de la semaine, du mois, de l\'année, des dates importantes et/ou des rendez-vous ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
     Question(
       id: '17',
       title:
           'Trouvez vous que vous comprenez pas ce que les autres disent, à rire à des moments inappropriés ?',
-      options: {'oui': false, 'non': true},
+      options: {'Oui': false, 'Non': true},
     ),
   ];
 
@@ -89,7 +89,7 @@ class _HomeScreen extends State<HomeScreen> {
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Please select any option'),
+          content: Text('Veuillez choisir une reponse'),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.symmetric(vertical: 20.0),
         ));
@@ -127,10 +127,10 @@ class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 160, 194, 225),
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('MinderBrainApp Quizz'),
+        title: Text('Page Quizz'),
         shadowColor: Colors.black,
         actions: [
           Padding(
@@ -144,6 +144,17 @@ class _HomeScreen extends State<HomeScreen> {
       ),
       body: Container(
           width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                Color.fromARGB(204, 232, 234, 235),
+                Color.fromARGB(204, 232, 234, 235),
+                Color.fromARGB(204, 232, 234, 235),
+                Color.fromARGB(204, 232, 234, 235),
+              ])),
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             children: [
@@ -165,7 +176,7 @@ class _HomeScreen extends State<HomeScreen> {
                         ? _questions[index].options.values.toList()[i] == true
                             ? Colors.green
                             : Colors.blue
-                        : Colors.black,
+                        : Color.fromARGB(255, 130, 130, 130),
                   ),
                 ),
 
@@ -177,7 +188,7 @@ class _HomeScreen extends State<HomeScreen> {
             ],
           )),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 45.0),
         child: NextButton(
           nextQuestion: nextQuestion,
         ),

@@ -19,7 +19,7 @@ class OptionCard extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 22.0,
-                color: Colors.white,
+                color: Color.fromARGB(255, 0, 0, 0),
               )),
         ));
   }

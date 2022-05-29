@@ -17,12 +17,15 @@ class QuestionWidget extends StatelessWidget {
     return Container(
       //alignment: Alignment.centerLeft,
       child: Column(children: [
-        SizedBox(height: 25.0),
+        SizedBox(height: 70.0),
         Text('Question ${indexAction + 1}/$totalQuestions: $question',
             style: TextStyle(
               fontSize: 24.0,
               color: Colors.black,
             )),
+        SizedBox(
+          height: 30,
+        )
       ]),
     );
   }

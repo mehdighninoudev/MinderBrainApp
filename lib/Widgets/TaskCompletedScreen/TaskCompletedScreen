@@ -33,16 +33,17 @@ class _TaskCompletedScreen extends State<TaskCompletedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("MinderBrain App"),
+        title: Text("                    Page Tasks"),
 
       ),
       body: SafeArea( 
         child: SingleChildScrollView(child: Column(children: [
+          
           Center(
-            child: Image.asset('images/logo.png'),
+            child: Image.asset('images/loog2.png'),
           ),
-
-          Center( child: Text("Voir Tache", 
+          
+          Center( child: Text("Voir Taches", 
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey, fontSize: 22.0),),
           ),
 
