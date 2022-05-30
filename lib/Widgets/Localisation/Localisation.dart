@@ -33,7 +33,7 @@ class _LocalisationState extends State<Localisation> {
         title: const Text(
           "Patient Localisation",
           style: TextStyle(
-            color: Color.fromARGB(160, 252, 3, 70),
+            color: Color.fromARGB(245, 255, 255, 255),
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -42,7 +42,7 @@ class _LocalisationState extends State<Localisation> {
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
-            target: LatLng(33.583443, -7.642486), zoom: 14.151926040649414),
+            target: LatLng(33.583443, -7.642486), zoom: 15.151926040649414),
         //markers: markers,
         circles: mycircles,
         zoomControlsEnabled: true,

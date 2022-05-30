@@ -32,7 +32,7 @@ class _TasksScreen extends State<TasksScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("                  Page Tasks"),
+        title: Text("                Page Tasks"),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -54,6 +54,9 @@ class _TasksScreen extends State<TasksScreen> {
                       color: Colors.blueGrey,
                       fontSize: 22.0),
                 ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               StreamBuilder<DatabaseEvent>(
                 stream: taskRef != null ? taskRef!.onValue : null,
@@ -82,8 +85,6 @@ class _TasksScreen extends State<TasksScreen> {
 
                     //return Center(child: Text(tasks.length.toString()),);
                     return Container(
-                      width: double.infinity,
-                      height: double.infinity,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
@@ -94,81 +95,84 @@ class _TasksScreen extends State<TasksScreen> {
                             Color.fromARGB(204, 232, 234, 235),
                             Color.fromARGB(204, 232, 234, 235),
                           ])),
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: tasks.length,
-                          itemBuilder: (context, index) {
-                            TaskModel task = tasks[index];
-                            return Container(
-                                padding: EdgeInsets.all(10),
-                                margin: EdgeInsets.only(bottom: 10),
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.black, width: 1),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text(task.taskName),
-                                    Text(getHumanReadableDate(task.dt)),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        IconButton(
-                                          icon: Icon(Icons.delete),
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (ctx) {
-                                                  return AlertDialog(
-                                                    title: Text(
-                                                        "Confirmation !!!"),
-                                                    content: Text(
-                                                        "Ar you sure to delete ?"),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Text("Non")),
-                                                      TextButton(
-                                                          onPressed: () async {
-                                                            if (taskRef !=
-                                                                null) {
-                                                              await taskRef!
-                                                                  .child(task
-                                                                      .taskId)
-                                                                  .remove();
-                                                            }
-                                                            Navigator.of(ctx)
-                                                                .pop();
-                                                          },
-                                                          child: Text("Oui")),
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                        ),
-                                        IconButton(
-                                          icon: Icon(Icons.edit),
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return UpdateTaskScreen(
-                                                  task: task);
-                                            }));
-                                          },
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ));
-                          }),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: tasks.length,
+                            itemBuilder: (context, index) {
+                              TaskModel task = tasks[index];
+                              return Container(
+                                  padding: EdgeInsets.all(10),
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 1),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text(task.taskName),
+                                      Text(getHumanReadableDate(task.dt)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(Icons.delete),
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (ctx) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          "Confirmation !!!"),
+                                                      content: Text(
+                                                          "Ar you sure to delete ?"),
+                                                      actions: [
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: Text("Non")),
+                                                        TextButton(
+                                                            onPressed:
+                                                                () async {
+                                                              if (taskRef !=
+                                                                  null) {
+                                                                await taskRef!
+                                                                    .child(task
+                                                                        .taskId)
+                                                                    .remove();
+                                                              }
+                                                              Navigator.of(ctx)
+                                                                  .pop();
+                                                            },
+                                                            child: Text("Oui")),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
+                                          ),
+                                          IconButton(
+                                            icon: Icon(Icons.edit),
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return UpdateTaskScreen(
+                                                    task: task);
+                                              }));
+                                            },
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ));
+                            }),
+                      ),
                     );
                   } else {
                     return Center(
