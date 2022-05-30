@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "309799418831",
+    "project_id": "minderbrain2",
+    "storage_bucket": "minderbrain2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309799418831:android:8f638907642821e25ef0ba",
+        "android_client_info": {
+          "package_name": "com.example.minderbrain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309799418831-od5t7ou2jpc3c5tqndjnnhhnkbmqa007.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYQXVYFICaijACTysRKhDLGd6OyO3Mktc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309799418831-od5t7ou2jpc3c5tqndjnnhhnkbmqa007.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
